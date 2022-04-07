@@ -3,7 +3,6 @@ library(dplyr)
 library(httr)
 library(lubridate)
 
-
 date_to_download <- lubridate::today("US/Central") - 1
 
 
