@@ -1,0 +1,42 @@
+name: Docker Image test
+
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:    
+    - uses: actions/checkout@master
+    - uses: r-lib/actions/setup-r@master
+    
+    - name: install packages
+      run: |
+        sudo apt-get install libcurl4-openssl-dev
+        R -e 'install.packages("magrittr")'
+        R -e 'install.packages("readr")'
+        R -e 'install.packages("dplyr")'
+        R -e 'install.packages("lubridate")'
+        R -e 'install.packages("httr")'
+        
+    - name: run code
+      run: Rscript R_code.R
+    # Add new files in data folder, commit along with other modified files, push.
+    - name: Commit files
+      run: |
+        git config --local user.name github-actions
+        git config --local user.email "actions@github.com"
+        git add data/*
+        git commit -am "GH ACTION Autorun $(date)"
+        git push origin main
+       
+      env:
+        REPO_KEY: ${{secrets.GITHUB_TOKEN}}
+        username: github-actions
