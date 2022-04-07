@@ -31,11 +31,10 @@ if(httr::http_error(base_URL)){
     mutate(Date = date_to_download) %>%
     subset(., select = c('Date', 'State', 'Avg_Confirmed', 'Avg_Deaths'))
   
-  old_data <- read_csv('data/test_data.csv)
-    print('x1')
-
-    if(date_to_download %in% old_data$Date'){
-      print('data already there')
+  old_data <- read_csv('data/test_data.csv')
+    
+    if(date_to_download %in% old_data$Date){
+      
     }else{
     data <- rbind(old_data, data)
     }
