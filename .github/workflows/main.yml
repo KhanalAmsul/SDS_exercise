@@ -27,7 +27,7 @@ jobs:
         R -e 'install.packages("httr")'
         
     - name: run code
-      run: Rscript R_code.R
+      run: Rscript r_code.R
     # Add new files in data folder, commit along with other modified files, push.
     - name: Commit files
       run: |
