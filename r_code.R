@@ -30,7 +30,7 @@ if(httr::http_error(base_URL)){
                   Avg_Deaths = Deaths) %>%
     mutate(Date = date_to_download) %>%
     subset(., select = c('Date', 'State', 'Avg_Confirmed', 'Avg_Deaths'))
-  if(file.exists('data/test_data.csv'){
+  if(file.exists('data/test_data.csv')){
      old_data <- readr::read_csv('data/test_data.csv')
     if(date_to_download %in% old_data$Date){
       
